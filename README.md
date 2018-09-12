@@ -1,6 +1,6 @@
 ## spring-boot-sample-test
-A test demo where it will simply process the given instruction in defined format and will outcome an expected data report.
-It's web spring boot application - time being all the instruction processing will log on console and it's a command line runner 
+Demo where it will simply process the given instruction in defined format and will do console log in an expected data report.
+It's a web spring boot application - time being all the instruction processing will on command line runner.
 
 ### environment and the tech stack used
 - Java 1.8+
