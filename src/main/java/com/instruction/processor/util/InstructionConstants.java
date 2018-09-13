@@ -9,13 +9,13 @@ public interface InstructionConstants {
 
 	public static final String CURRENCY_AED = "AED";
 	public static final String CURRENCY_SAR = "SAR";
-	public static final String CURRENCY_OTHER = "OTHER";
+	public static final String CURRENCY_SGP_OTHER = "SGP";
 	public static final String INCOMING_TRADING = "B";
 	public static final String OUTGOING_TRADING = "S";
 
-	public static final Map<Integer, String> DAY_OF_WORK_WEEK_FOR_OTHERS = initOthersMap();
+	public static final Map<Integer, String> DAY_OF_WORK_WEEK_FOR_SGP_OTHERS = initSgpOthersMap();
 
-	static Map<Integer, String> initOthersMap() {
+	static Map<Integer, String> initSgpOthersMap() {
 		Map<Integer, String> mapObject = new HashMap<>();
 		mapObject.put(Calendar.MONDAY, "MONDAY");
 		mapObject.put(Calendar.TUESDAY, "TUESDAY");

@@ -5,13 +5,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.instruction.processor.dto.Instruction;
-import com.instruction.processor.dto.InstructionReport;
 
 public class InstructionUtil {
 
@@ -19,7 +17,7 @@ public class InstructionUtil {
 	private static final DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
 
 	public static Instruction createInstruction(String financialEntity, String buyRSellIndicator, double agrredFix, String currency,
-			String instructionDate, String settlementDate, long units, double unitPrice) {
+			Date instructionDate, Date settlementDate, int units, double unitPrice) {
 		Instruction instruction = new Instruction();
 		instruction.setFinancialEntity(financialEntity);
 		instruction.setBuyRSellIndicator(buyRSellIndicator);
@@ -32,46 +30,25 @@ public class InstructionUtil {
 		return instruction;
 	}
 
-	public static boolean isDayOfProcessingWeek(String givenDate, String currency) {
+	public static boolean isDayOfProcessingWeek(Date processingDate, String currency) {
 		if (InstructionConstants.CURRENCY_AED.equalsIgnoreCase(currency) || InstructionConstants.CURRENCY_SAR.equalsIgnoreCase(currency)) {
-			return InstructionConstants.DAY_OF_WORK_WEEK_FOR_AED_N_SAR.containsKey(getDayOfWeek(givenDate));
+			return InstructionConstants.DAY_OF_WORK_WEEK_FOR_AED_N_SAR.containsKey(getDayOfWeek(processingDate));
 		} else {
-			return InstructionConstants.DAY_OF_WORK_WEEK_FOR_OTHERS.containsKey(getDayOfWeek(givenDate));
+			return InstructionConstants.DAY_OF_WORK_WEEK_FOR_SGP_OTHERS.containsKey(getDayOfWeek(processingDate));
 		}
 	}
 
-	public static int getDayOfWeek(String givenDate) {
+	public static int getDayOfWeek(Date givenDate) {
 		Calendar c = Calendar.getInstance();
-		c.setTime(getDateFromString(givenDate));
+		c.setTime(givenDate);
 		return c.get(Calendar.DAY_OF_WEEK);
 	}
 
-	public static String getNextDateOfWeek(String givenDate) {
+	public static Date getNextDateOfWeek(Date settlementDate) {
 		Calendar c = Calendar.getInstance();
-		c.setTime(getDateFromString(givenDate));
+		c.setTime(settlementDate);
 		c.add(Calendar.DAY_OF_YEAR, 1);
-		return getDateInddMMYYFormat(c.getTime());
-	}
-
-	public static void generateInstructionReport(Instruction instructionItem, String itemKey, int recordCount,
-			Map<String, InstructionReport> instructionAfterProcessing) {
-		InstructionReport instructionReport = new InstructionReport();
-		double totalIncomingTradingAmount = 0.0;
-		double totalOutgoingTradingAmount = 0.0;
-
-		if (null != instructionAfterProcessing.get(itemKey)) {
-			instructionReport = instructionAfterProcessing.get(itemKey);
-			totalIncomingTradingAmount = instructionReport.getIncomingAmountInUSD();
-			totalOutgoingTradingAmount = instructionReport.getOutgoingAmountInUSD();
-		}
-		instructionReport.setEntityRankByTradingAmount(recordCount);
-		double totalTradingAmount = instructionItem.getAgreedFix() * instructionItem.getUnitPrice() * instructionItem.getUnits();
-		if (instructionItem.getBuyRSellIndicator().equalsIgnoreCase(InstructionConstants.INCOMING_TRADING)) {
-			instructionReport.setIncomingAmountInUSD(totalTradingAmount + totalIncomingTradingAmount);
-		} else if (instructionItem.getBuyRSellIndicator().equalsIgnoreCase(InstructionConstants.OUTGOING_TRADING)) {
-			instructionReport.setOutgoingAmountInUSD(totalTradingAmount + totalOutgoingTradingAmount);
-		}
-		instructionAfterProcessing.put(itemKey, instructionReport);
+		return c.getTime();
 	}
 
 	public static String getDateInddMMYYFormat(Date givenDate) {

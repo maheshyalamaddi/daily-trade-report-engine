@@ -8,13 +8,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.instruction.processor.controller.InstructionProcessor;
 
 @SpringBootApplication
-public class TestMain implements CommandLineRunner {
+public class Main implements CommandLineRunner {
 
 	@Autowired
 	private InstructionProcessor instructionProcessor;
 
 	public static void main(String[] args) {
-		SpringApplication sa = new SpringApplication(TestMain.class);
+		SpringApplication sa = new SpringApplication(Main.class);
 		sa.run(args);
 	}
 

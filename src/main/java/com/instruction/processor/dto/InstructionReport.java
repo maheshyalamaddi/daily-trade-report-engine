@@ -6,15 +6,15 @@ package com.instruction.processor.dto;
  * @author
  *
  */
-public class InstructionReport implements Comparable<InstructionReport> {
+public class InstructionReport extends Instruction {
+	@Override
+	public String toString() {
+		return String.format("InstructionReport [incomingAmountInUSD=%s, outgoingAmountInUSD=%s]", incomingAmountInUSD,
+				outgoingAmountInUSD);
+	}
+
 	private double incomingAmountInUSD;
 	private double outgoingAmountInUSD;
-	private long entityRankByTradingAmount;
-
-	@Override
-	public int compareTo(InstructionReport o) {
-		return Long.compare(entityRankByTradingAmount, o.getEntityRankByTradingAmount());
-	}
 
 	public double getIncomingAmountInUSD() {
 		return incomingAmountInUSD;
@@ -31,21 +31,4 @@ public class InstructionReport implements Comparable<InstructionReport> {
 	public void setOutgoingAmountInUSD(double outgoingAmountInUSD) {
 		this.outgoingAmountInUSD = outgoingAmountInUSD;
 	}
-
-	public long getEntityRankByTradingAmount() {
-		return entityRankByTradingAmount;
-	}
-
-	public void setEntityRankByTradingAmount(long entityRankByTradingAmount) {
-		this.entityRankByTradingAmount = entityRankByTradingAmount;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("InstructionReport [incomingAmountInUSD=").append(incomingAmountInUSD).append(", outgoingAmountInUSD=")
-				.append(outgoingAmountInUSD).append(", entityRankByTradingAmount=").append(entityRankByTradingAmount).append("]");
-		return builder.toString();
-	}
-
 }

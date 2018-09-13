@@ -1,5 +1,7 @@
 package com.instruction.processor.dto;
 
+import java.util.Date;
+
 /**
  * Inbound instruction from financial entity which holds both buy and sell
  * 
@@ -12,9 +14,9 @@ public class Instruction {
 	private String buyRSellIndicator;
 	private double agreedFix;
 	private String currency;
-	private String instructionDate;
-	private String settlementDate;
-	private long units;
+	private Date instructionDate;
+	private Date settlementDate;
+	private int units;
 	private double unitPrice;
 
 	public long getId() {
@@ -57,27 +59,27 @@ public class Instruction {
 		this.currency = currency;
 	}
 
-	public String getInstructionDate() {
+	public Date getInstructionDate() {
 		return instructionDate;
 	}
 
-	public void setInstructionDate(String instructionDate) {
+	public void setInstructionDate(Date instructionDate) {
 		this.instructionDate = instructionDate;
 	}
 
-	public String getSettlementDate() {
+	public Date getSettlementDate() {
 		return settlementDate;
 	}
 
-	public void setSettlementDate(String settlementDate) {
+	public void setSettlementDate(Date settlementDate) {
 		this.settlementDate = settlementDate;
 	}
 
-	public long getUnits() {
+	public int getUnits() {
 		return units;
 	}
 
-	public void setUnits(long units) {
+	public void setUnits(int units) {
 		this.units = units;
 	}
 
@@ -91,20 +93,8 @@ public class Instruction {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Instructions [id=").append(id).append(", ");
-		if (financialEntity != null)
-			builder.append("financialEntity=").append(financialEntity).append(", ");
-		if (buyRSellIndicator != null)
-			builder.append("buyRSellIndicator=").append(buyRSellIndicator).append(", ");
-		builder.append("agreedFix=").append(agreedFix).append(", ");
-		if (currency != null)
-			builder.append("currency=").append(currency).append(", ");
-		if (instructionDate != null)
-			builder.append("instructionDate=").append(instructionDate).append(", ");
-		if (settlementDate != null)
-			builder.append("settlementDate=").append(settlementDate).append(", ");
-		builder.append("units=").append(units).append(", unitPrice=").append(unitPrice).append("]");
-		return builder.toString();
+		return String.format(
+				"Instruction [id=%s, financialEntity=%s, buyRSellIndicator=%s, agreedFix=%s, currency=%s, instructionDate=%s, settlementDate=%s, units=%s, unitPrice=%s]",
+				id, financialEntity, buyRSellIndicator, agreedFix, currency, instructionDate, settlementDate, units, unitPrice);
 	}
 }
