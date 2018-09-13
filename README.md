@@ -2,7 +2,8 @@
 A test demo where it will simply process the given instruction(please refer sample data file under resources) in defined format and will outcome an expected data report.
 It's web spring boot application - time being all the instruction processing will log on console and it's a command line runner
 
-And the approach taken here as simple MVC as follow : Viewer(END User) <---|DTO|--> Controller<---|DTO&HELPERS|--->Model (Repository)
+And the approach taken here as simple MVC as follow : 
+-- Viewer(END User) <---|DTO|--> Controller<---|DTO&HELPERS|--->Model (Repository)
 
 Spring actuator is enabled here for this added spring-starter-web though the actual project Object doesn't required web, And actuator config bit easy for web when compared to non-web JMX.
 Only core and default actuator used here and the security is not enabled hence the endpoints are enabled only for INFO.
