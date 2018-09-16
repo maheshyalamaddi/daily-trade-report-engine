@@ -1,4 +1,5 @@
-##![#c5f015](https://placehold.it/15/c5f015/000000?text=+) daily-trade-report-engine
+## ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) daily-trade-report-engine
+
 	A test demo where it will simply process the given instruction(please refer sample data file under resources) 
 	in defined format and will outcome an expected data report.
 	
@@ -15,7 +16,7 @@
 		* Integration test coverage is not required as we do not have any separate downstream system.
 		* Achieved 100% code coverage using Junit/Mockito - TDD
 
-##![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Getting Started
+## ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) Getting Started
 ### Built with
 	* Java 1.8+
 	* Windows
