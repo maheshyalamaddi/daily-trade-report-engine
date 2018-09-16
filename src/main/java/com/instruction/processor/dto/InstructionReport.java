@@ -1,7 +1,7 @@
 package com.instruction.processor.dto;
 
 /**
- * Outbound report record after Instruction processing
+ * Trading report record after Instruction processing.
  * 
  * @author
  *
@@ -9,8 +9,10 @@ package com.instruction.processor.dto;
 public class InstructionReport extends Instruction {
 	@Override
 	public String toString() {
-		return String.format("InstructionReport [incomingAmountInUSD=%s, outgoingAmountInUSD=%s]", incomingAmountInUSD,
-				outgoingAmountInUSD);
+		return String.format(
+				"InstructionReport [incomingAmountInUSD=%s, outgoingAmountInUSD=%s, getFinancialEntity()=%s, getBuyRSellIndicator()=%s, getAgreedFix()=%s, getCurrency()=%s, getInstructionDate()=%s, getSettlementDate()=%s, getUnits()=%s, getUnitPrice()=%s]",
+				incomingAmountInUSD, outgoingAmountInUSD, getFinancialEntity(), getBuyRSellIndicator(), getAgreedFix(), getCurrency(),
+				getInstructionDate(), getSettlementDate(), getUnits(), getUnitPrice());
 	}
 
 	private double incomingAmountInUSD;

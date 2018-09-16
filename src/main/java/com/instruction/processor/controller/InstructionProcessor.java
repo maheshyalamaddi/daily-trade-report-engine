@@ -2,6 +2,7 @@ package com.instruction.processor.controller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,11 +42,20 @@ public class InstructionProcessor {
 		generateInstructionReport();
 	}
 
+	/**
+	 * Preparing the stub trading instruction data which will be loaded from in memory database H2
+	 * 
+	 */
 	private void prepareInstruction() {
 		instructionList = instructionRepositoryImpl.loadAll();
 		logger.info("loaing predefined mock data from in memory H2 --> \n\t{}", instructionList);
 	}
 
+	/**
+	 * Will be processing the loaded stubbed OR given trading instruction data.
+	 * And the processing will be done based on Currency , Buy or Sell Indicator and the Instruction OR trading date.
+	 * 
+	 */
 	private void processInstruction() {
 		if (!ObjectUtils.isEmpty(instructionList)) {
 			int counter = 0;
@@ -71,6 +81,10 @@ public class InstructionProcessor {
 		}
 	}
 
+	/**
+	 * Generate the trading instruction from the global trading instruction list which is processed.
+	 * 
+	 */
 	private void generateInstructionReport() {
 		if (!ObjectUtils.isEmpty(instructionAfterProcessing)) {
 			 Map<String, Map<String, List<InstructionReport>>> outComeGroupedMap=  instructionAfterProcessing.stream()
@@ -80,13 +94,33 @@ public class InstructionProcessor {
 				 logger.info("record grouping by entity :--> {}", groupItem.getKey());
 				 if(!ObjectUtils.isEmpty(groupItem)) {
 					 for(Map.Entry<String,List<InstructionReport>> groupInnerItem : (groupItem.getValue()).entrySet()) {
-						 logger.info(" and then sell/buy & it's details : --> {}", groupInnerItem.toString());
+						 if(!ObjectUtils.isEmpty(groupInnerItem)) {
+							 logger.info(" and then sell/buy indicator : {} --> total --> {}", groupInnerItem.getKey(), groupInnerItem.getValue().size());
+							 for(InstructionReport groupInnerInstructionReport : groupInnerItem.getValue()) {
+								 if(!ObjectUtils.isEmpty(groupInnerInstructionReport)) {
+									 if(!ObjectUtils.isEmpty(groupInnerInstructionReport)) {
+										 logger.info(" & it's details : --> {}", groupInnerItem.toString());									 
+									 }
+								 }
+							 }
+							 Map<Date, Double> sumIncoming = groupInnerItem.getValue().stream().collect(
+						                Collectors.groupingBy(InstructionReport::getInstructionDate, Collectors.summingDouble(InstructionReport::getIncomingAmountInUSD)));
+							 Map<Date, Double> sumOutgoing = groupInnerItem.getValue().stream().collect(
+						                Collectors.groupingBy(InstructionReport::getInstructionDate, Collectors.summingDouble(InstructionReport::getOutgoingAmountInUSD)));
+							 logger.info("--------------summery by settlement date---------------)\n Incoming {}  Outgoing  {} ", sumIncoming, sumOutgoing);
+						 }
 					 }
 				 }
 			 }
 		}
 	}
 	
+	/**
+	 * Instruction record population into static list for the current thread.
+	 * 
+	 * @param instructionItem
+	 * @param recordCount
+	 */
 	private void prepareInstructionReport(Instruction instructionItem, int recordCount) {
 		InstructionReport instructionReport = new InstructionReport();
 		instructionReport.setFinancialEntity(instructionItem.getFinancialEntity());
@@ -94,6 +128,9 @@ public class InstructionProcessor {
 		instructionReport.setInstructionDate(instructionItem.getSettlementDate());
 		instructionReport.setSettlementDate(instructionItem.getSettlementDate());
 		instructionReport.setCurrency(instructionItem.getCurrency());
+		instructionReport.setAgreedFix(instructionItem.getAgreedFix());
+		instructionReport.setUnitPrice(instructionItem.getUnitPrice());
+		instructionReport.setUnits(instructionItem.getUnits());
 		double totalTradingAmount = instructionItem.getAgreedFix() * instructionItem.getUnitPrice() * instructionItem.getUnits();
 		if (instructionItem.getBuyRSellIndicator().equalsIgnoreCase(InstructionConstants.INCOMING_TRADING)) {
 			instructionReport.setIncomingAmountInUSD(totalTradingAmount);

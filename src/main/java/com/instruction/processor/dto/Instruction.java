@@ -3,7 +3,7 @@ package com.instruction.processor.dto;
 import java.util.Date;
 
 /**
- * Inbound instruction from financial entity which holds both buy and sell
+ * Trading instruction from financial entity which holds both buy and sell
  * 
  * @author
  *

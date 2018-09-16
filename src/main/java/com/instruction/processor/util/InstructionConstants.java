@@ -5,6 +5,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Constants which are applicable for daily-trade instruction processing report.
+ * 
+ * @author 
+ *
+ */
 public interface InstructionConstants {
 
 	public static final String CURRENCY_AED = "AED";
