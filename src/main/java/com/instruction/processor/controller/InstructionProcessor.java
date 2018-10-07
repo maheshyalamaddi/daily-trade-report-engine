@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 
-import com.instruction.processor.dto.Instruction;
-import com.instruction.processor.dto.InstructionReport;
+import com.instruction.processor.bean.Instruction;
+import com.instruction.processor.bean.InstructionReport;
 import com.instruction.processor.repository.InstructionRepositoryImpl;
 import com.instruction.processor.util.InstructionConstants;
 import com.instruction.processor.util.InstructionUtil;
@@ -33,10 +33,10 @@ public class InstructionProcessor {
 	@Autowired
 	InstructionRepositoryImpl instructionRepositoryImpl;
 
-	List<Instruction> instructionList = null;
-	List<InstructionReport> instructionAfterProcessing = new ArrayList<InstructionReport>();
+	private static List<Instruction> instructionList = null;
+	private static final List<InstructionReport> instructionAfterProcessing = new ArrayList<InstructionReport>();
 
-	public void execute() {
+	public void prepareTradeReport() {
 		prepareInstruction();
 		processInstruction();
 		generateInstructionReport();

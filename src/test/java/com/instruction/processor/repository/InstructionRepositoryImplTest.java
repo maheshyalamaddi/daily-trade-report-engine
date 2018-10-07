@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.instruction.processor.dto.Instruction;
+import com.instruction.processor.bean.Instruction;
 
 @RunWith(MockitoJUnitRunner.class)
 public class InstructionRepositoryImplTest {

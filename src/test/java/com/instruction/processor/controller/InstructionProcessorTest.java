@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.instruction.processor.dto.Instruction;
+import com.instruction.processor.bean.Instruction;
 import com.instruction.processor.repository.InstructionRepositoryImpl;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -50,7 +50,7 @@ public class InstructionProcessorTest {
 
 	@Test
 	public void testExecute() {
-		instructionProcessor.execute();
+		instructionProcessor.prepareTradeReport();
 	}
 
 }

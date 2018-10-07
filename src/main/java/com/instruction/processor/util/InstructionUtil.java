@@ -9,7 +9,7 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.instruction.processor.dto.Instruction;
+import com.instruction.processor.bean.Instruction;
 
 /**
  * An utility class which has helper methods used in daily-trade instruction processing report.

@@ -22,6 +22,7 @@
 	* Windows
 	* Spring Boot 2.0.0.0 +
 	* Maven 3.0+
+	* lombok (is used to reduce boilerplate code for model/data objects, e.g., it can generate getters and setters for those object 		automatically by using Lombok annotations.)
 
 ### Get it live
 	* Ensure the Java and Maven is already setup in workstation

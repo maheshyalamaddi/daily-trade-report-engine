@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.instruction.processor.dto.Instruction;
+import com.instruction.processor.bean.Instruction;
 
 @RunWith(MockitoJUnitRunner.class)
 public class InstructionUtilTest {

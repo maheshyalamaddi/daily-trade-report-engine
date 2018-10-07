@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.instruction.processor.dto.Instruction;
+import com.instruction.processor.bean.Instruction;
 
 /**
  * An in -memory repository implementation to save the trading instructions data into database.
